@@ -60,8 +60,13 @@ namespace WindowsForms_UI_User_Interface_
 
         private void button3_Click(object sender, EventArgs e)
         {
-
-
+            
+          bool sonuc = Urunler.UrunGuncelle(new Urun() 
+          { 
+           UrunAdi=textBoxurunadi.Text, BirimFiyati = short.Parse( textBoxfiyat.Text), HedefStokDüzeyi = short.Parse(textBoxhedefstok.Text) 
+           , UrunID = (int)dataGridView_Urunler.CurrentRow.Cells["UrunID"].Value    
+          });
+            dataGridView_Urunler.DataSource = Urunler.listele();
         }
     }
 }

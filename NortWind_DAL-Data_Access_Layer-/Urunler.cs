@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -46,9 +47,15 @@ namespace NortWind_DAL_Data_Access_Layer_
             return Tools.ExecutenonQery(komut);
         }
 
-        public static bool  UrunGuncelle(int id)
+        public static bool  UrunGuncelle(Urun urn)
         {
-            return true;
+            SqlCommand komut = new SqlCommand("UrunGuncelle",Tools.Baglanti);
+            komut.CommandType = CommandType.StoredProcedure ;
+            komut.Parameters.AddWithValue("@urunid",urn.UrunID);
+            komut.Parameters.AddWithValue("@urunadi", urn.UrunAdi);
+            komut.Parameters.AddWithValue("@birimFiyat", urn.BirimFiyati);
+            komut.Parameters.AddWithValue("@HedefStokdüzeyi", urn.HedefStokDüzeyi);
+            return Tools.ExecutenonQery(komut);
         }
     }
 }
